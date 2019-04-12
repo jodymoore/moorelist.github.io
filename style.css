@@ -4,6 +4,7 @@
 body {
     font: 14px/21px"Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
     background-color: midnightblue;
+    color: white;
 }
 
 label {
@@ -18,7 +19,7 @@ label {
     margin-right:auto;
     padding:20px;
     border-radius: 5px 5px 0 0;
-    border: 2px solid #6f212f;
+    border: 2px solid #000000;
 }
 #wrapper input {
     margin-left: auto;
