@@ -34,7 +34,10 @@ li {
     border: #222 solid 1px;
     list-style-type: none;
 }
-
+#btnSubmit {
+    background-color: darkBlue;
+    color: white;
+}
 
 #about {
     background-color: whitesmoke;
