@@ -3,12 +3,11 @@
 }
 body {
     font: 14px/21px"Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
-    background-color: midnightblue;
-    color: white;
+    background-color: yellow;
+    color: black;
 }
 
 label {
-     float:right;
     padding-right: 15px;
     text-indent: 5px;
 }
@@ -27,7 +26,7 @@ label {
 }
 
 h1 {
-    color: #FFFFFF;
+    color: #000000;
     margin: 10px 0 20px 0;
     font-size: 24px;
     text-align:center;
