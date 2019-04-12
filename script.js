@@ -151,61 +151,50 @@ function remove_unwanted(str) {
 
 
 //v 3.1 Update function addShoppinglist by adding objects
-function addShoppinglist(item,cost) {
+function addShoppinglist(item) {
   //v 3.0 declare variable for groc string
-  var groc="";
-  //v 3.0 v 3.0 declare variable for loop count
-  var count=0;
-  //v 3.0 edit value for MyItems.name
-  MyItems.name=item;
-  //v 3.0 edit value for MyItems.cost
-  MyItems.price=cost;
-  //v 3.0 for loop through object propterties and 
-  for (var x in MyItems){
-    if (count===1){
-      groc += "$";
-    }
-    //add to groc string from object array item
-    groc += MyItems[x];
-    if (count===0){
-      groc += "|";
-    }
-    //increment count by 1
-   count++;
-  }
   //push to shoppinglist
-  shoppinglist.push(groc);
+  if (item != "")
+  {
+  document.getElementById("sharelist").innerHTML = ' ';
+  shoppinglist.push(item);
   //display shoppinglist
   displayShoppinglists();
 //v3.1 display displayShoppingCart() 
   displayShoppingCart(); 
-  
-  savecookie();
-  
   clearFocus();
+  //v 4.0 save cookie
+  savecookie();
+  }else
+  {
+  alert("Item Description Required: Please enter now :)");
+  clearFocus();
+  }
 }
+
 
 function clearFocus()
 {
   document.getElementById("item").value = "";
-   document.getElementById("cost").value = "";
   document.getElementById("item").focus();
 }
 
 
 //v 3.1: update function displayShoppinglists() to add to cart 
 function displayShoppinglists() {
+document.getElementById("MyList").innerHTML = '';
 var TheList = "";
 var TheRow = "";
 var arrayLength = shoppinglist.length;
 for (var i = 0; i < shoppinglist.length; i++) {
   //v 3.1 change button name to btndelete
-var btndelete =  ' <input class="button" id="remove" name="delete" type="button" value="Remove Item" onclick="deleteShoppinglists(' + i + ')" />';
+var btndelete =  ' <input class="button" id="remove" name="delete" type="button" value="Remove" onclick="deleteShoppinglists(' + i + ')" />';
 var btnupdate =  ' <input class="button" name="edit" type="button" value="Edit Item" onclick="changeShoppinglist(' + i + ')" />';
 //v 3.1 add edit button using below i index & name it btnpdate
 var arrays = shoppinglist[i];
 arrays = "'"+arrays+"'";
-var btnaddcart =  '<label><input name="add" type="checkbox" id="adds" value="Add to Shopping Cart" onclick="addtoshopcart('+arrays+','+ i +')" /></label>';
+var btnaddcart =  '<input name="add" type="checkbox" id="adds" value="Add to Shopping Cart" onclick="addtoshopcart('+arrays+','+ i +')" />';
+var btnsharelist = '<input class="button" id="shares" name="shares" type="submit" value="Share Shopping List" onclick="share()" />';
 TheRow = '<li>' + shoppinglist[i] + btndelete + ' '  + btnaddcart + '</li>';
 TheList += TheRow;
 }
@@ -213,9 +202,12 @@ TheList += TheRow;
 if (arrayLength > 0)
 {
   document.getElementById("MyList").innerHTML = '<ul>' + TheList + '</ul>';
+  document.getElementById("sharebutton").innerHTML = btnsharelist;
 }else
 {
-  document.getElementById("MyList").innerHTML = '';
+  document.getElementById("MyList").innerHTML = ' ';
+  document.getElementById("sharebutton").innerHTML = ' ';
+    document.getElementById("sharelist").innerHTML = ' ';
 }
 }
 
