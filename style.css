@@ -1,0 +1,30 @@
+*:focus {
+    outline: none;
+}
+body {
+    font: 14px/21px"Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", sans-serif;
+}
+
+label {
+     float:right;
+    padding-right: 15px;
+    text-indent: 5px;
+}
+
+#wrapper {
+    width:560px;
+    margin-left: auto;
+    margin-right:auto;
+    padding:20px;
+    border-radius: 5px 5px 0 0;
+    border: 2px solid #6f212f;
+}
+h1 {
+    color: #222;
+    margin: 10px 0 20px 0;
+    font-size: 24px;
+    text-align:center;
+}
+
+
+
