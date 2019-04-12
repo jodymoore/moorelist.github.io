@@ -1,3 +1,141 @@
+//v 4.0 save / get array via cookies
+//v 4.0 read cookie on load and display
+
+//v4.1 get values via URL
+function get(name){
+    var url = window.location.search;
+    var num = url.search(name);
+    var namel = name.length;
+    var frontlength = namel+num+1; //length of everything before the value
+    var front = url.substring(0, frontlength);
+    url = url.replace(front, "");
+    num = url.search("&");
+    if(num>=0) return url.substr(0,num);
+    if(num<0)  return url;
+}
+//vFinal ShareList via bitly api
+function passlist()
+{
+   var getshorturl=0;
+   var login = "o_3iokgmm945";
+   var api_key = "R_f2f3c9387a374e3fc6bf4b1ec2c945c4";
+   var long_url = "https://rvclist.github.io/index.html?list="+ shoppinglist;
+  try{
+  $.getJSON(
+             "https://api-ssl.bitly.com/v3/shorten?callback=?",
+              {
+             "format": "json",
+              "apiKey": api_key,
+             "login": login,
+              "longUrl": long_url
+              },
+             function(response)
+             {
+                getshorturl = 1;
+                document.getElementById("sharelist").innerHTML = 'Share List:\n' + response.data.url;
+                copyToClipboard(response.data.url);
+                // copyToClipboard('sharelist');
+                 //alert("ShoppingList URL Copied");
+             });
+  } catch(err) {
+   //alert("Error : "+ err);
+    document.getElementById("sharelist").innerHTML = 'Share List:\n' + long_url;
+    //copyToClipboard("sharelist");
+    copyToClipboard(long_url);
+    //alert("ShoppingList URL Copied");
+}
+}
+//vFinal share function
+function share()
+{
+   passlist();
+}
+//v4.1 prompt message to copy URL
+function copyToClipboard(text) {
+   window.prompt("Copy & Share List!", text);
+}
+//v4.0 Add popup describing app when visitors load webpage the first time
+window.onload = function() {
+    alert("Welcome to 'Shopping List' App!\n\nCreated by Rock Valley College\n**Javascript(Web233) Students**\n\nQuestions?\nemail Professor Chuck Konkol\nc.konkol@rockvalleycollege.edu\n\nRegister @ RockValleyCollege.edu");
+    populateshoppinglistonload();
+    displayShoppinglists();
+    clearFocus();
+};
+
+function about()
+{
+    alert("Welcome to 'Shopping List' App!\n\nCreated by Rock Valley College\n**Javascript(Web233) Students**\n\nQuestions?\nemail Professor Chuck Konkol\nc.konkol@rockvalleycollege.edu\n\nRegister @ RockValleyCollege.edu");
+    
+}
+//read cookie and return
+function readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
+
+//v. 4.0remove and format cookie
+function remove_unwanted(str) {  
+    
+  if ((str===null) || (str===''))  
+       return false;  
+ else  
+   str = str.toString();
+    //clean space
+   str = str.replace(/%20/g, " ");
+    //clean !
+    str = str.replace(/%21/g, "!");
+   str = str.replace(/%24/g, "$"); 
+   str = str.replace(/%7C/g, " | ");
+  return str.replace(/[^\x20-\x7E]/g, '');  
+}  
+
+
+//v 4.0 save cookie
+function savecookie()
+{
+  delete_cookie('konkollist');
+   var date = new Date();
+   //keeps for a year
+    date.setTime(date.getTime() + Number(365) * 3600 * 1000);
+   document.cookie = 'konkollist' + "=" + escape(shoppinglist.join(',')) + "; path=/;expires = " + date.toGMTString();
+}
+
+
+//v 4.0 delete cookie
+function delete_cookie(name) {
+  document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
+
+function populateshoppinglistonload()
+{
+  shoppinglist = [];
+  addtocart = [];
+  //load cookie into array
+  var y = readCookie('konkollist');
+  //remove unwanted chars and format
+  y = remove_unwanted(y); 
+  //spit array by comma %2C
+  
+   //v 4.1 get URL
+  var geturllistvalue = get("list");
+    if (geturllistvalue) {
+        geturllistvalue = remove_unwanted(geturllistvalue);
+      geturllistvalue = geturllistvalue.split(',');
+      shoppinglist = geturllistvalue;
+  }else if (y){
+       y = y.split('%2C');
+      shoppinglist = y;
+  }
+}
+
+
 var MyItems = {
   name:"",
   price:""
@@ -21,6 +159,7 @@ function changeShoppinglist(position) {
   shoppinglist[position] = eitem + "," + '$' + ecost;
   displayShoppinglists();
   displayShoppingCart();
+  //v 4.0 save cookie
   savecookie();
 }
 
@@ -37,7 +176,8 @@ function changeShoppingCart(position) {
   addtocart[position] = eitem + "," + '$' + ecost;
   displayShoppinglists();
   displayShoppingCart();
-  savecookie();
+  //v 4.0 save cookie
+   savecookie();
 }
 
 //v3.1 
@@ -49,106 +189,25 @@ function addbacktoshoppinglist(item,num) {
   displayShoppinglists();
 //v3.1 display displayShoppingCart() 
   displayShoppingCart(); 
-  savecookie();
   clearFocus();
+  //v 4.0 save cookie
+   savecookie();
 }
 
 //v 3.1 Update function addShoppinglist by adding objects
 function addtoshopcart(item, num) {
+    document.getElementById("sharelist").innerHTML = ' ';
     deleteShoppinglists(num);
     addtocart.push(item);
   //display shoppinglist
   displayShoppinglists();
 //v3.1 display displayShoppingCart() 
   displayShoppingCart(); 
-  savecookie();
   //Clear
   clearFocus();
+  //v 4.0 save cookie
+   savecookie();
 }
-
-//v 4.0 save cookie
-function savecookie()
-{
-  delete_cookie('moorelist');
-   var date = new Date();
-   //keeps for a year
-    date.setTime(date.getTime() + Number(365) * 3600 * 1000);
-   document.cookie = 'moorelist' + "=" + escape(shoppinglist.join(',')) + "; path=/;expires = " + date.toGMTString();
-}
-
-//In .JS file
-//v 4.0 read cookie and return
-function readCookie(name) {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
-    for(var i=0;i < ca.length;i++) {
-        var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1,c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-    }
-    return null;
-}
-
-//In .JS file
-//v 4.0 save cookie
-function savecookie()
-{
-  delete_cookie('moorelist'); //replace konkol with YOUR last name
-   var date = new Date();
-   //keeps for a year
-    date.setTime(date.getTime() + Number(365) * 3600 * 1000);
-  //replace konkol with YOUR last name
-   document.cookie = 'moorelist' + "=" + escape(shoppinglist.join(',')) + "; path=/;expires = " + date.toGMTString();
-}
-
-
-//In .JS file
-//v 4.0 delete cookie
-function delete_cookie(name) {
-  document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-}
-
-//In .JS file
-//v 4.0 save cookie
-//v 4.0 read cookie on load and display
-window.onload = function() {
-  populateshoppinglistonload();
-   displayShoppinglists();
-};
-
-//In .JS file
-//v 4.0 populateshoppinglistonload()
-function populateshoppinglistonload()
-{
-  shoppinglist = [];
-  addtocart = [];
-  //load cookie into array
-  var y = readCookie('moorelist'); //replace konkol with YOUR last name
-  //remove unwanted chars and format
-  y = remove_unwanted(y); 
-  //spit array by comma %2C
-  y = y.split('%2C');
-  if (y) {
-    shoppinglist = y;
-   }
-}
-
-//In .JS file
-//v. 4.0remove and format cookie
-function remove_unwanted(str) {  
-    
-  if ((str===null) || (str===''))  
-       return false;  
- else  
-   str = str.toString();  
-   str = str.replace(/%20/g, "");
-   str = str.replace(/%24/g, "$"); 
-   str = str.replace(/%7C/g, " | ");
-  return str.replace(/[^\x20-\x7E]/g, '');  
-}  
-
-
-
 
 //v 3.1 Update function addShoppinglist by adding objects
 function addShoppinglist(item) {
@@ -172,10 +231,10 @@ function addShoppinglist(item) {
   }
 }
 
-
 function clearFocus()
 {
   document.getElementById("item").value = "";
+ //  document.getElementById("cost").value = "";
   document.getElementById("item").focus();
 }
 
@@ -213,49 +272,49 @@ if (arrayLength > 0)
 
 //v3.1
 function displayShoppingCart() {
+document.getElementById("MyCart").innerHTML = ''
 var TheList = "";
 var TheRow = "";
 var arrayLength = addtocart.length;
 for (var i = 0; i < arrayLength; i++) {
   //v 3.1 change button name to btndelete
-var btndelete =  ' <input class="button" id="remove" name="delete" type="button" value="Remove Item" onclick="deleteShoppingCart(' + i + ')" />';
+var btndelete =  ' <input class="button" id="remove" name="delete" type="button" value="Remove" onclick="deleteShoppingCart(' + i + ')" />';
 //v 3.1 add edit button using below i index & name it btnpdate
 var btnupdate =  ' <input class="button" name="edit" type="button" value="Edit Item" onclick="changeShoppingCart(' + i + ')" />';
 var arrays = addtocart[i];
 arrays = "'"+arrays+"'";
 //v 3.1 add edit button using below i index & name it btnpdate
-var btnaddlist =  '<label><input name="add" type="checkbox" id="adds" value="Add to Shopping List" onclick="addbacktoshoppinglist('+arrays+',' + i + ')" checked="checked"/>Add</label>';
-TheRow =  "<li>" + addtocart[i] + btndelete + ' ' +  ' ' + btnaddlist + '<br></li>';
+var btnaddlist =  '<input name="add" type="checkbox" id="adds" value="Add to Shopping List" onclick="addbacktoshoppinglist('+arrays+',' + i + ')" checked="checked"/>';
+TheRow =  "<li>" + addtocart[i] + btndelete + ' ' +  ' ' + btnaddlist + '</li>';
 TheList += TheRow;
 }
 if (arrayLength > 0)
 {
-  document.getElementById("MyCart").innerHTML = 'Shopping Cart ' + '<br><ul>' + TheList + '</ul>';
+  document.getElementById("labels").innerHTML = 'Purchased';
+  document.getElementById("MyCart").innerHTML = '<ul>' + TheList + '</ul>';
 }else{
+  document.getElementById("labels").innerHTML = '';
   document.getElementById("MyCart").innerHTML = '';
+    
 }
 }
 
 //v3.1
 function deleteShoppinglists(position) {
+  document.getElementById("sharelist").innerHTML = ' ';
   shoppinglist.splice(position, 1);
   displayShoppinglists();
   displayShoppingCart();
+   //v 4.0 save cookie
   savecookie();
 }
 //v3.1
 function deleteShoppingCart(position) {
+  document.getElementById("sharelist").innerHTML = ' ';
   addtocart.splice(position, 1);
   displayShoppinglists();
   displayShoppingCart();
-  savecookie();
 }
 
-
-function about()
-{
-    alert("Welcome to 'Shopping List' App!\n\nCreated by Rock Valley College\n**Javascript(Web233) Students**\n\nQuestions?\nemail Professor Chuck Konkol\nc.konkol@rockvalleycollege.edu\n\nRegister @ RockValleyCollege.edu");
-    
-}
 
 
