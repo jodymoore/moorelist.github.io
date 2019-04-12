@@ -16,10 +16,24 @@ label {
     width:560px;
     margin-left: auto;
     margin-right:auto;
+    text-align: center;
     padding:20px;
     border-radius: 5px 5px 0 0;
     border: 2px solid #000000;
 }
+
+li:nth-child(odd) {
+    background: #ccc;
+}
+
+li {
+    background: #ccc;
+    margin: 5px 0px;
+    line-height: 1.6;
+    padding: 10px;
+    border: #222 solid 1px;
+}
+
 
 #about {
     background-color: whitesmoke;
@@ -29,6 +43,7 @@ label {
 #sharebutton{
     background-color: whitesmoke;
     color: black;
+    width: min-content;
 }
 #wrapper input {
     margin-left: auto;
