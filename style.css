@@ -25,7 +25,12 @@ label {
     margin-right:auto;
 }
 
-b {
+#footer a {
+    
+    color: white;
+}
+
+#footer b {
     color: white;
     background-color: darkblue;
 }
