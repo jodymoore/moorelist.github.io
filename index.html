@@ -14,11 +14,15 @@
   <body>
      <div id="wrapper">
     <h1>Shopping List</h1>
+         <div id="mainDiv">
     Item <input type="text" id="item" name="item" />&nbsp;
 
-      <input class="button" name="submit" type="button" value="+Add" onclick="addShoppinglist(item.value, cost.value)" /><br>
+      <input class="button" name="submit" type="button" value="+Add" onclick="addShoppinglist(item.value)" /><br>
          
       <input class="button" id="about" name="submit" type="submit" value="about" onclick="about()">
+         
+         </div>
+
   <p id="MyList"></p>
    <p id="MyCart"></p>   
    </div>
