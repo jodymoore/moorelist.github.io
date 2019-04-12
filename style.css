@@ -25,6 +25,11 @@ label {
     margin-right:auto;
 }
 
+b {
+    color: white;
+    background-color: darkblue;
+}
+
 h1 {
     color: #000000;
     margin: 10px 0 20px 0;
