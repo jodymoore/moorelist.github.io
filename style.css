@@ -71,6 +71,7 @@ li {
     padding: 3px 10px 3px 10px;
     color: white;
     background-color: darkblue;
+    border-radius: 5px;
 }
 
 h1 {
