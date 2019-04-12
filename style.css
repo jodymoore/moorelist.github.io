@@ -47,6 +47,7 @@ label {
 }
 
 #footer b {
+    padding: 3px 10px 3px 10px;
     color: white;
     background-color: darkblue;
 }
