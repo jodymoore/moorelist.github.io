@@ -17,9 +17,13 @@ function get(name){
 function passlist()
 {
    var getshorturl=0;
-   var login = "o_3iokgmm945";
-   var api_key = "R_f2f3c9387a374e3fc6bf4b1ec2c945c4";
+
+   var login = "jodyone";
+   
+   var api_key = "R_92881963d3a24eeeae1f0cd5e4f3e1c0";
+
    var long_url = "https://rvclist.github.io/index.html?list="+ shoppinglist;
+
   try{
   $.getJSON(
              "https://api-ssl.bitly.com/v3/shorten?callback=?",
@@ -56,7 +60,7 @@ function copyToClipboard(text) {
 }
 //v4.0 Add popup describing app when visitors load webpage the first time
 window.onload = function() {
-    alert("Welcome to 'Song List' App!\n\nCreated by Rock Valley College\n**Javascript(Web233) Students**\n\nQuestions?\nemail Professor Chuck Konkol\nc.konkol@rockvalleycollege.edu\n\nRegister @ RockValleyCollege.edu");
+    alert("Welcome to 'Shopping List' App!\n\nCreated by Rock Valley College\n**Javascript(Web233) Students**\n\nQuestions?\nemail Professor Chuck Konkol\nc.konkol@rockvalleycollege.edu\n\nRegister @ RockValleyCollege.edu");
     populateshoppinglistonload();
     displayShoppinglists();
     clearFocus();
@@ -64,7 +68,7 @@ window.onload = function() {
 
 function about()
 {
-    alert("Welcome to 'Song List' App!\n\nCreated by Rock Valley College\n**Javascript(Web233) Students**\n\nQuestions?\nemail Professor Chuck Konkol\nc.konkol@rockvalleycollege.edu\n\nRegister @ RockValleyCollege.edu");
+    alert("Welcome to 'Shopping List' App!\n\nCreated by Rock Valley College\n**Javascript(Web233) Students**\n\nQuestions?\nemail Professor Chuck Konkol\nc.konkol@rockvalleycollege.edu\n\nRegister @ RockValleyCollege.edu");
     
 }
 //read cookie and return
@@ -99,7 +103,7 @@ function remove_unwanted(str) {
 //v 4.0 save cookie
 function savecookie()
 {
-  delete_cookie('konkollist');
+  delete_cookie('moorelist');
    var date = new Date();
    //keeps for a year
     date.setTime(date.getTime() + Number(365) * 3600 * 1000);
@@ -253,7 +257,7 @@ var btnupdate =  ' <input class="button" name="edit" type="button" value="Edit I
 var arrays = shoppinglist[i];
 arrays = "'"+arrays+"'";
 var btnaddcart =  '<input name="add" type="checkbox" id="adds" value="Add to Shopping Cart" onclick="addtoshopcart('+arrays+','+ i +')" />';
-var btnsharelist = '<input class="button" id="shares" name="shares" type="submit" value="Share Song List" onclick="share()" />';
+var btnsharelist = '<input class="button" id="shares" name="shares" type="submit" value="Share Shopping List" onclick="share()" />';
 TheRow = '<li>' + shoppinglist[i] + btndelete + ' '  + btnaddcart + '</li>';
 TheList += TheRow;
 }
