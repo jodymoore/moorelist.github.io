@@ -22,7 +22,7 @@ function passlist()
    
    var api_key = "R_92881963d3a24eeeae1f0cd5e4f3e1c0";
 
-   var long_url = "https://rvclist.github.io/index.html?list="+ shoppinglist;
+   var long_url = "https://jodymoore.github.io/moorelist.github.io/?list="+ shoppinglist;
 
   try{
   $.getJSON(
