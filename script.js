@@ -19,7 +19,7 @@ function passlist()
    var getshorturl=0;
 
    var login = "jodyone";
-   
+
    var api_key = "R_92881963d3a24eeeae1f0cd5e4f3e1c0";
 
    var long_url = "https://jodymoore.github.io/moorelist.github.io/?list="+ shoppinglist;
@@ -60,7 +60,7 @@ function copyToClipboard(text) {
 }
 //v4.0 Add popup describing app when visitors load webpage the first time
 window.onload = function() {
-    alert("Welcome to 'Shopping List' App!\n\nCreated by Rock Valley College\n**Javascript(Web233) Students**\n\nQuestions?\nemail Professor Chuck Konkol\nc.konkol@rockvalleycollege.edu\n\nRegister @ RockValleyCollege.edu");
+    alert("Welcome to 'Song List' App!\n\nCreated by Rock Valley College\n**Javascript(Web233) Students**\n\nQuestions?\nemail Professor Chuck Konkol\nc.konkol@rockvalleycollege.edu\n\nRegister @ RockValleyCollege.edu");
     populateshoppinglistonload();
     displayShoppinglists();
     clearFocus();
@@ -68,7 +68,7 @@ window.onload = function() {
 
 function about()
 {
-    alert("Welcome to 'Shopping List' App!\n\nCreated by Rock Valley College\n**Javascript(Web233) Students**\n\nQuestions?\nemail Professor Chuck Konkol\nc.konkol@rockvalleycollege.edu\n\nRegister @ RockValleyCollege.edu");
+    alert("Welcome to 'Song List' App!\n\nCreated by Rock Valley College\n**Javascript(Web233) Students**\n\nQuestions?\nemail Professor Chuck Konkol\nc.konkol@rockvalleycollege.edu\n\nRegister @ RockValleyCollege.edu");
     
 }
 //read cookie and return
@@ -107,7 +107,7 @@ function savecookie()
    var date = new Date();
    //keeps for a year
     date.setTime(date.getTime() + Number(365) * 3600 * 1000);
-   document.cookie = 'konkollist' + "=" + escape(shoppinglist.join(',')) + "; path=/;expires = " + date.toGMTString();
+   document.cookie = 'moorelist' + "=" + escape(shoppinglist.join(',')) + "; path=/;expires = " + date.toGMTString();
 }
 
 
@@ -122,7 +122,7 @@ function populateshoppinglistonload()
   shoppinglist = [];
   addtocart = [];
   //load cookie into array
-  var y = readCookie('konkollist');
+  var y = readCookie('moorelist');
   //remove unwanted chars and format
   y = remove_unwanted(y); 
   //spit array by comma %2C
